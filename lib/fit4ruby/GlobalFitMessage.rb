@@ -118,6 +118,9 @@ module Fit4Ruby
         end
 
         value += @opts[:offset] if @opts[:offset]
+	if value.is_a?(Float)
+          value=value.nan? ? 0 : value
+        end
         value = (value * @opts[:scale].to_f).to_i if @opts[:scale]
 
         case @opts[:type]
