@@ -101,6 +101,25 @@ module Fit4Ruby
     entry 0, 'metric'
     entry 1, 'statute'
 
+    dict 'duration_type'
+    entry 0, 'time'
+    entry 1, 'distance'
+    entry 2, 'hr_less_than'
+    entry 3, 'hr_greater_than'
+    entry 4, 'calories'
+    entry 5, 'open'
+    entry 6, 'repeat_until_steps_cmplt'
+    entry 7, 'repeat_until_time'
+    entry 8, 'repeat_until_distance'
+    entry 9, 'repeat_until_calories'
+    entry 10, 'repeat_until_hr_less_than'
+    entry 11, 'repeat_until_hr_greater_than'
+    entry 12, 'repeat_until_power_less_than'
+    entry 13, 'repeat_until_power_greater_than'
+    entry 14, 'power_less_than'
+    entry 15, 'power_greater_than'
+    entry 28, 'repetition_time'
+
     dict 'event'
     entry 0, 'timer'
     entry 3, 'workout'
@@ -223,6 +242,7 @@ module Fit4Ruby
     entry 1, 'rest'
     entry 2, 'warmup'
     entry 3, 'cooldown'
+    entry 4, 'recover'
 
     dict 'lap_trigger'
     entry 0, 'manual'
@@ -419,6 +439,14 @@ module Fit4Ruby
     entry 26, 'cardio_training'
     entry 254, 'all'
 
+    dict 'wkt_step_target'
+    entry 0, 'speed'
+    entry 1, 'heart_rate'
+    entry 2, 'open'
+    entry 3, 'cadence'
+    entry 4, 'power'
+    entry 5, 'grade'
+    entry 6, 'resistance'
   end
 
 end

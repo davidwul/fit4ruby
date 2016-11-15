@@ -345,6 +345,40 @@ module Fit4Ruby
     # counter.
     field 2, 'byte', 'undocumented_field_2', :array => true
 
+    message 26, 'workout'
+    field 4, 'enum', 'sport', :dict => 'sport'
+    field 5, 'uint32z', 'workout_capabilities'
+    field 6, 'uint16', 'num_valid_steps'
+    field 8, 'string', 'wkt_name'
+        
+    message 27, 'workout_step'
+    field 0, 'string', 'wkt_step_name'
+    field 1, 'enum', 'duration_type', :dict => 'duration_type'
+    field 3, 'enum','target_value', :dict => 'wkt_step_target'
+    alt_field 4, 'duration_type' do
+      field :default, 'uint32', 'duration_value'
+      field ['time','repetition_type'], 'uint32', 'duration_time',:scale => 1000, :unit => 's'
+      field 'distance','uint32', 'duration_distance',:scale => 100, :unit => 'm' 
+      field ['hr_less_than','hr_greater_than'],'uint32', 'duration_hr', :unit => 'bpm'
+    end
+    alt_field 5,'target_value' do
+      field :default,'uint32','custom_target_value_low'
+      field 'speed','uint32', 'custom_target_speed_low',:scale => 1000, :unit => 'm/s' 
+      field 'heart_rate','uint32', 'custom_target_heart_rate_low', :unit => 'bpm' 
+      field 'cadence','uint32', 'custom_target_cadence_low', :unit => 'bpm' 
+      field 'power','uint32', 'custom_target_power_low', :unit => 'watts' 
+    end
+    alt_field 6,'target_value' do
+      field :default,'uint32','custom_target_value_high'
+      field 'speed','uint32', 'custom_target_speed_high',:scale => 1000, :unit => 'm/s' 
+      field 'heart_rate','uint32', 'custom_target_heart_rate_high', :unit => 'bpm' 
+      field 'cadence','uint32', 'custom_target_cadence_high', :unit => 'bpm' 
+      field 'power','uint32', 'custom_target_power_high', :unit => 'watts' 
+    end
+    field 7, 'enum', 'intensity', :dict => 'intensity'
+    field 254, 'enum', 'message_index', :dict => 'message_index'
+        
+
     # Message 29 is just a guess. It's not officially documented.
     # Found in LCTNS.FIT on Fenix 3
     message 29, 'location'
@@ -479,8 +513,6 @@ module Fit4Ruby
     field 5, 'uint16', 'resting_metabolic_rate', :unit => 'kcal/day'
     # Just a guess, not officially documented
     field 7, 'uint32', 'goal_cycles', :array => true
-    # Showed up in Fenix3HR firmware 3.84. Haven't seen a value yet.
-    field 8, 'enum', 'undocumented_field_8', :array => true
     field 253, 'uint32', 'timestamp', :type => 'date_time'
 
     # Not part of the official ANT SDK doc
